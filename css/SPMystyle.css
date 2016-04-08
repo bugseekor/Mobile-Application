@@ -1,0 +1,50 @@
+/*
+Assignment 1
+Author : Sangkyun Park
+File name : myStyle.css
+Stylesheet for a mobile application prototype
+Feb. 12th, 2015 : Sam Created.
+*/
+
+.SPImg {
+    text-align:center;
+}
+#SPOkButton{
+    background-color: dodgerblue;
+    color: white;
+}
+#SPFeedbackList{
+    margin: 30px 5px;
+}
+#SPCancelBtn{
+    background-color: yellow;
+    color: black;
+}
+#SPDeleteBtn{
+    background-color: black;
+    color: white;
+}
+#SPUpdateBtn{
+    background-color: dodgerblue;
+    color: white;
+}
+#SPSaveBtn{
+    background-color: dodgerblue;
+    color: white;
+}
+#SPClearBtn{
+    background-color: black;
+    color: white;
+}
+#SPHide, #SPHide2{
+    display: none;
+}
+label.error{
+    color: #F00;
+    font-weight: bold;
+}
+input.error,
+select.error,
+textarea.error {
+    border: 1px red solid;
+}

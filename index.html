@@ -1,0 +1,230 @@
+<!--
+Assignment 1
+Assignment 2
+Assignment 3
+Author : Sangkyun Park
+File name : index.html
+Building a mobile application prototype
+Feb. 12th, 2016 : Sam Created.
+Mar. 6th, 2016 : Sam Modified.
+Apr. 7th, 2016 : Sam Modified.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>SP Feedback A3</title>
+    <!--style sheet-->
+    <link type="text/css" rel="stylesheet" href="css/lib/jquery.mobile-1.4.5.css">
+    <link type="text/css" rel="stylesheet" href="css/SPMystyle.css">
+    <!--jQuery-->
+    <script src="js/lib/jquery-2.1.4.js"></script>
+    <!--Jquery Mobile-->
+    <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+    <!--jQuery validator-->
+    <script src="js/lib/jquery.validate.js"></script>
+    <!--my scripts-->
+    <script src="js/SPDatabase.js"></script>
+    <script src="js/SPFeedbackDAL.js"></script>
+    <script src="js/SPUtil.js"></script>
+    <script src="js/SPGlobal.js"></script>
+    <script src="js/SPFacade.js"></script>
+</head>
+<body>
+
+<!--page 1-->
+<div data-role="page" id="SPHomePage">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h1>SP Feedback A3</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#SPHomePage" data-icon="home"
+                       class="ui-btn-active ui-state-persist" data-theme="a">Home</a></li>
+                <li><a href="#SPAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                <li><a href="#SPViewFeedbackPage" data-icon="grid" data-theme="a">Reviews</a></li>
+                <li><a href="#SPSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <h1>Sangkyun Park's Feedback A3 App</h1>
+        <p>Welcome to the Sangkyun Park's Feedback A3 app. A prototype designed for mobile programming class. this is
+            the
+            first iteration of the app to keep track of different places you visited along with your reviews</p>
+        <p class="SPImg"><img src="images/sp-icon.png" width="50%"></p>
+        <p>Please feel free to contact me if you</p>
+        <a href="tel:5197485220" data-role="button" data-icon="plus">Call:519.748.5220</a>
+        <a href="mailto:spaddress@conestogac.on.ca" data-role="button" data-icon="plus">spaddress@conestogac.on.ca</a>
+        <p>Website:</p>
+        <a href="http://www.conestogac.on.ca" target="_blank" data-role="button" data-icon="plus">Conestoga College</a>
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h4>&copy; Sangkyun Park</h4>
+    </footer>
+</div>
+
+<!--page 2-->
+<div data-role="page" id="SPAddFeedbackPage">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h1>Add a Feedback</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#SPHomePage" data-icon="home" data-theme="a">Home</a></li>
+                <li><a href="#SPAddFeedbackPage" data-icon="plus"
+                       class="ui-btn-active ui-state-persist" data-theme="a">Add</a></li>
+                <li><a href="#SPViewFeedbackPage" data-icon="grid" data-theme="a">Reviews</a></li>
+                <li><a href="#SPSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <form id="SPFrmAddForm" name="SPFrmAddForm" data-ajax="false">
+            <label for="SPTxtName">Business Name:</label>
+            <input type="text" id="SPTxtName" name="SPTxtName" data-theme="a" data-clear-btn="true">
+            <label for="SPDrpType">Type:</label>
+            <select id="SPDrpType" name="SPDrpType">
+                <!--options here-->
+            </select>
+            <label for="SPTxtEmail">Reviewer Email:</label>
+            <input type="text" id="SPTxtEmail" name="SPTxtEmail" data-theme="a"
+                   data-clear-btn="true">
+            <label for="SPTxtComment">Reviewer Comments:</label>
+            <textarea id="SPTxtComment" name="txtComment"></textarea>
+            <label for="SPReviewDate">Review Date:</label>
+            <input type="date" id="SPReviewDate" name="SPReviewDate" placeholder="mm/dd/yyyy">
+            <input type="checkbox" id="SPChbxRating" name="chbxRating">
+            <label for="SPChbxRating">Do you want to add your ratings?</label>
+
+                <span id="SPHide">
+                    <label for="SPFoodQuality">Food Quality (0-5):</label>
+                    <input type="number" id="SPFoodQuality" name="SPFoodQuality" value="0">
+                    <label for="SPService">Service (0-5):</label>
+                    <input type="number" id="SPService" name="SPService" value="0">
+                    <label for="SPValue">Value (0-5):</label>
+                    <input type="number" id="SPValue" name="SPValue" value="0">
+                    <label for="SPNumRating">Overall Ratings(1-100):</label>
+                    <input type="text" id="SPNumRating" name="txtRating" readonly="true" disabled="true">
+                </span>
+
+            <a href="#" id="SPOkButton" data-role="button" data-inline="true">SAVE</a>
+        </form>
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h4>&copy; Sangkyun Park</h4>
+    </footer>
+</div>
+
+<!--page 3-->
+<div data-role="page" id="SPViewFeedbackPage">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h1>List of Reviews</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#SPHomePage" data-icon="home" data-theme="a">Home</a></li>
+                <li><a href="#SPAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                <li><a href="#SPViewFeedbackPage" data-icon="grid"
+                       class="ui-btn-active ui-state-persist" data-theme="a">Reviews</a></li>
+                <li><a href="#SPSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <ul id="SPFeedbackList" data-role="listview" data-icon="" class="ui-listview-inset">
+
+        </ul>
+
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h4>&copy; Sangkyun Park</h4>
+    </footer>
+</div>
+
+<!--page 4-->
+<div data-role="page" id="SPEditFeedbackPage">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h1>Modify Feedback</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#SPHomePage" data-icon="home" data-theme="a">Home</a></li>
+                <li><a href="#SPAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                <li><a href="#SPViewFeedbackPage" data-icon="grid"
+                       class="ui-btn-active ui-state-persist" data-theme="a">Reviews</a></li>
+                <li><a href="#SPSettingsPage" data-icon="gear" data-theme="a">Settings</a></li>
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <form id="SPFrmEditForm" name="SPFrmEditForm">
+            <label for="SPtxtName2">Business Name:</label>
+            <label for="SPDrpType2">Type:</label>
+            <input type="text" id="SPtxtName2" name="SPtxtName2" data-theme="a"
+                   data-clear-btn="true" value="Digging Shoes">
+            <select id="SPDrpType2" name="SPdrpType2">
+
+            </select>
+            <label for="SPtxtEmail2">Reviewer Email:</label>
+            <input type="text" id="SPtxtEmail2" name="SPtxtEmail2" data-theme="a"
+                   data-clear-btn="true" value="expert123@funcode.com">
+            <label for="SPtxtComment2">Reviewer Comments:</label>
+            <textarea name="txtComment" id="SPtxtComment2">So durable!</textarea>
+            <label for="SPReviewDate">Review Date:</label>
+            <input type="date" id="SPReviewDate2" name="SPReviewDate2" placeholder="mm/dd/yyyy">
+
+            <input type="checkbox" id="SPChbxRating2" name="chbxRating">
+            <label for="SPChbxRating2">Do you want to add your ratings?</label>
+
+                <span id="SPHide2">
+                    <label for="SPFoodQuality2">Food Quality (0-5):</label>
+                    <input type="number" id="SPFoodQuality2" name="SPFoodQuality2" value="0">
+                    <label for="SPService2">Service (0-5):</label>
+                    <input type="number" id="SPService2" name="SPService2" value="0">
+                    <label for="SPValue2">Value (0-5):</label>
+                    <input type="number" id="SPValue2" name="SPValue2" value="0">
+                    <label for="SPNumRating2">Overall Ratings(1-100):</label>
+                    <input type="text" id="SPNumRating2" name="txtRating" readonly="true" disabled="true">
+                </span>
+
+            <div data-role="controlgroup" data-type="horizontal">
+                <a href="#" id="SPCancelBtn" data-role="button">Cancel</a>
+                <a href="#" id="SPDeleteBtn" data-role="button">Delete</a>
+                <a href="#" id="SPUpdateBtn" data-role="button">Update</a>
+            </div>
+        </form>
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h4>&copy; Sangkyun Park</h4>
+    </footer>
+</div>
+
+<!--page 5-->
+<div data-role="page" id="SPSettingsPage">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h1>Settings</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#SPHomePage" data-icon="home" data-theme="a">Home</a></li>
+                <li><a href="#SPAddFeedbackPage" data-icon="plus" data-theme="a">Add</a></li>
+                <li><a href="#SPViewFeedbackPage" data-icon="grid" data-theme="a">Reviews</a></li>
+                <li><a href="#SPSettingsPage" data-icon="gear"
+                       class="ui-btn-active ui-state-persist" data-theme="a">Settings</a></li>
+            </ul>
+        </div>
+    </header>
+    <section data-role="content">
+        <form id="SPFrmSettingsForm" name="SPFrmSettingsForm">
+            <label for="SPReviewerEmail">Default reviewer Email:</label>
+            <input type="email" id="SPReviewerEmail" name="SPReviewerEmail" data-theme="a" data-clear-btn="true">
+
+            <a href="#" id="SPSaveBtn" data-role="button">Save Defaults</a>
+            <a href="#" id="SPClearBtn" data-role="button">Clear Database</a>
+
+        </form>
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h4>&copy; Sangkyun Park</h4>
+    </footer>
+</div>
+
+</body>
+</html>
